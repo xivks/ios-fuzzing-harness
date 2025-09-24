@@ -1,1 +1,13 @@
+=== Sample Run (fuzz_plist.py) ===
+Date: 2025-09-24 18:08:40
+Host: devbox-local (Ubuntu 22.04)
+Python: 3.11.4
+Duration: 00:02:45
+Iterations attempted: 200
+Unique exceptions observed: JSONDecodeError, ValueError
+Top 3 anomalies (count):
+ - Unexpected type returned (5)
+ - Deep nesting ValueError (2)
+ - Decode failures (7)
+Notes: All results are reproducible locally; sample inputs saved in samples/. No user data accessed. Logs redacted for disclosure.
 
