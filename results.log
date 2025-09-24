@@ -1,6 +1,1 @@
-[2025-09-24 18:05:12] Iter 12: MUTATION OK — parsed object keys: ['key']
-[2025-09-24 18:05:23] Iter 34: MUTATION OK — parsed array length: 5
-[2025-09-24 18:05:45] Iter 57: Exception caught: JSONDecodeError: Expecting value at line 1 column 1 (document starts with invalid token)
-[2025-09-24 18:06:01] Iter 84: Anomaly: Parser returned unexpected type (list instead of dict)
-[2025-09-24 18:06:40] Iter 157: Exception caught: ValueError: too many nested structures (depth 1024) — recorded for analysis
-[2025-09-24 18:07:02] Run summary: 200 iterations, 4 anomalies, 2 exception classes logged, seed samples used: samples/sample1.json
+
