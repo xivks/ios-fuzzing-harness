@@ -11,6 +11,8 @@ import time
 
 SAMPLES_DIR = "samples"
 RESULTS_FILE = "results.log"
+CRASH_DIR = "crash_samples"
+os.makedirs(CRASH_DIR, exist_ok=True)
 
 def mutate(s: str) -> str:
     # tiny mutation: flip random bytes, insert random char or duplicate
@@ -20,17 +22,21 @@ def mutate(s: str) -> str:
         s.insert(i, chr(random.randint(32, 126)))
     return "".join(s)
 
-def run_test(input_data: str):
+def run_test(input_data: str, iter_no: int = None):
     try:
-        # Example parser: using json loads as a safe stand-in for plist parsing
         parsed = json.loads(input_data)
-        # Sanity check
         if isinstance(parsed, dict):
             return "OK"
         return "OK"
     except Exception as e:
-        with open(RESULTS_FILE, "a") as f:
-            f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Crash/Exception: {e}\n")
+        # save mutated input for triage
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        fname = f"crash_{iter_no or 'na'}_{timestamp}.txt"
+        with open(os.path.join(CRASH_DIR, fname), "w", encoding="utf-8") as f:
+            # write a redacted/encoded version to reduce accidental payload exposure
+            f.write(input_data)
+        with open(RESULTS_FILE, "a", encoding="utf-8") as f:
+            f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Iter {iter_no or '?'} Exception: {type(e).__name__}: {e}\n")
         return "CRASH"
 
 def main():
